@@ -25,6 +25,7 @@ html {
 
 }
 
+/* Padding langst binnekant */
 *,
 *::after,
 *::after {
@@ -146,7 +147,7 @@ hr {
     border: 0;
     height: 1px;
     background: LightGrey;
-    margin: 0 0 24px;
+    margin: 0 0 24px;ZZ
 }
 
 a {
@@ -175,12 +176,23 @@ a:focus {
 */
 
 .o-row {
-    display: flow-root;
     padding: 24px 24px 0;
+    /* display: flow-root genereert een blokcontainerbox, en maakt de inhoud op met flow-opmaak. Het creëert altijd een nieuwe blok opmaak context voor zijn inhoud. */
+    /* Blijf in dit blok */ 
+    display: flow-root;
+
+}
+
+.o-row-sm {
+    padding: 0 0 0;
+    /* display: flow-root genereert een blokcontainerbox, en maakt de inhoud op met flow-opmaak. Het creëert altijd een nieuwe blok opmaak context voor zijn inhoud. */
+    /* Blijf in dit blok */ 
+    display: flow-root;
+
 }
 
 .o-row--primary {
-    background-color: hotpink;
+    background-color: #44C8F5;
     color: #fff;
 }
 
@@ -195,6 +207,10 @@ a:focus {
     }
 }
 
+
+
+
+
 /*
     Objects: Container
     ---
@@ -204,7 +220,20 @@ a:focus {
 .o-container {
     max-width: 90em;
     /* 1em = 19px so 1440/19 = 90 */
+    /* center in css */
+    /* 
+      margin: 25px 50px 75px 100px;
+        margin: 25px 50px 75px 100px;
+        top margin is 25px
+        right margin is 50px
+        bottom margin is 75px
+        left margin is 100px
+
+    */ 
     margin: 0 auto;
+    border-style: dashed;
+    border-color: #e50aa0;
+    
 
 }
 
@@ -217,8 +246,26 @@ a:focus {
 */
 
 .o-layout {
+    display: -webkit-flex;
+    display: -ms-flexbox;
     display: flex;
     flex-wrap: wrap;
+
+   /* border-style: solid;
+    border-color: #4ce50a; */
+    
+
+}
+
+.test {
+    border-style: solid;
+    border-color: #4ce50a;
+
+}
+
+.test2 {
+    border-style: dashed;
+    border-color: #0014eb;
 }
 
 .o-layout__item {
@@ -228,10 +275,17 @@ a:focus {
 /* gutter modifiers, these affect o-layout__item too */
 
 .o-layout--gutter {
-    margin: 0 -12px;
+    /* Algineer items tov container */ 
+    margin: 0 -12px; 
 }
 
+
+
 .o-layout--gutter>.o-layout__item {
+    /*
+        Standaard hebben items geen gutter. We gaan die aanzetten door padding
+        links en rechts toe te voegen afhankelijk van de modifier op het o-layout block.
+    */ 
     padding: 0 12px;
 }
 
@@ -334,6 +388,9 @@ a:focus {
 
 }
 
+.item_align_self {
+    align-self: flex-end;
+}
 
 /*------------------------------------*\
   #COMPONENTS
@@ -358,6 +415,53 @@ a:focus {
     white-space: nowrap;
 }
 
+/*
+    Component: Cat
+    ---
+    A small component to demonstrate the layout items
+*/
+
+.katImg {
+    margin-bottom: 0px;
+}
+
+/*
+    Component: Author
+    ---
+    A small component to demonstrate the layout items
+*/
+
+.c-author__avatar{
+    width: 56px;
+    height: 56px;
+    border-radius: 100%;
+}
+
+.c-author__name, .c-author__title {
+    margin-bottom: 0;
+}
+
+
+.c-author {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.c-author__name {
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.c-author__title {
+    font-family: "Inter Web", sans-serif;
+    font-size: 14px;
+    line-height: 24px;
+}
+
+
+
 
 /*------------------------------------*\
   #UTILITIES
@@ -370,58 +474,68 @@ a:focus {
     Will be mostly used on o-layout__item
 */
 
-.u-flex-basis-auto {}
+.u-flex-basis-auto {
+    flex-basis: auto !important;
+}
 
 .u-1-of-2 {
-    flex-basis: calc(100% / 2);
+    flex-basis: calc(100% / 2) !important;
+    /* 50% */ 
 }
 
 .u-1-of-3 {
-    flex-basis: calc(100% / 3);
+    flex-basis: calc(100% / 3) !important;
+    /* 33.33% */
 }
 
 .u-2-of-3 {
-    flex-basis: calc(100% / 3 * 2);
+    flex-basis: calc(100% / 3 * 2)  !important;
+    /* 66.66% */
 }
 
 .u-1-of-4 {
-    flex-basis: calc(100% / 4);
+    flex-basis: calc(100% / 4) !important;
+    /* 25% */
 }
 
 .u-2-of-4 {
-    flex-basis: calc(100% / 4*2);
+    flex-basis: calc(100% / 4*2) !important;
+    /* 50% */
 }
 
 .u-3-of-4 {
-    flex-basis: calc(100% / 4 * 3);
+    flex-basis: calc(100% / 4 * 3) !important;
+    /* 75% */
 }
 
 .u-1-of-5 {
-    flex-basis: calc(100% / 5);
+    flex-basis: calc(100% / 5) !important;
+    /* 20% */
 }
 
 .u-2-of-5 {
-    flex-basis: calc(100% / 5*2);
-
+    flex-basis: calc(100% / 5*2) !important;
+    /* 40% */
 }
 
 .u-3-of-5 {
-    flex-basis: calc(100% / 5*3);
-
+    flex-basis: calc(100% / 5*3) !important;
+    /* 60% */
 }
 
 .u-4-of-5 {
-    flex-basis: calc(100% / 5*4);
-
+    flex-basis: calc(100% / 5*4) !important;
+    /* 80% */
 }
 
 .u-1-of-6 {
-    flex-basis: calc(100% / 6);
-
+    flex-basis: calc(100% / 6) !important;
+    /* 16.66% */
 }
 
 .u-5-of-6 {
-    flex-basis: calc(100% / 6*5);
+    flex-basis: calc(100% / 6*5) !important;
+    /* 83.33% */
 }
 
 @media (min-width: 576px) {
@@ -688,23 +802,34 @@ a:focus {
     Utility classes to put specific max widths onto elements
 */
 
+/*
+    Utilities: max-width
+    ---
+    Utility classes to put specific max widths onto elements
+*/
+
 .u-max-width-sm {
     max-width: 36em !important;
 }
 
 .u-max-width-md {
-    max-width: 36em !important;
+    max-width: 45em !important;
+
 }
 
 .u-max-width-lg {
-    max-width: 45em !important;
+    max-width: 60em !important;
+
 }
 
 .u-max-width-xl {
-    max-width: 60em !important;
+    max-width: 75em !important;
+
 }
 
-.u-max-width-none {}
+.u-max-width-none {
+    max-width: none !important;
+}
 
 
 /*------------------------------------*\
@@ -816,3 +941,4 @@ a:focus {
         page-break-after: avoid;
     }
 }
+
